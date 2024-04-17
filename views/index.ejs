@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>  Blog Pirince | <%=title %></title>
+      <%- include('./parcials/head.ejs') %>
 </head>
 <body>
-    <nav>
-        <div class="site-title">
-            <a href="/">
-                <h1>Blog Pirince</h1>
-            </a>
-            <p>Pirince Liyo site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blog</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">New Blog</a></li>
-        </ul>
-    </nav>
+  <%- include('./parcials/nav.ejs') %>
     <div class="blogs content">
         <h2>All Blogs</h2>
     
@@ -28,8 +14,10 @@
                 <p class="snippet"><%=blog.snippet %></p>
            <% }) %>
                 
-            <% } %>
+            <% }else{ %>
+                <p>there is nothing puplish yet</p>
+                <% } %>
     </div>
-    
+                      <%- include('./parcials/footer.ejs') %>
 </body>
 </html>
