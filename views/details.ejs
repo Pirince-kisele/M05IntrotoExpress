@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+      <%- include('./parcials/head.ejs') %>
+
+<body>
+  <%- include('./parcials/nav.ejs') %>
+    <div class="details content">
+        <h2><%= blog.title %></h2>
+        <div class="content">
+            <p>
+                <%= blog.body %>
+            </p>
+            <a class="delete" data-doc="<%= blog._id %>"> delete</a>
+        </div>
+      
+    </div>
+       <%- include('./parcials/footer.ejs') %>
+           <script>
+            const transhcan = document.querySelector('.delete');
+               transhcan.addEventListener('click', (e)=>{
+                   const endpoint = `/blogs/${transhcan.dataset.doc}`;
+
+                   fetch(endpoint, {
+                        methode:'DELETE'
+                   })
+                   .then((response) => {
+                       response.json()
+                   })
+                    .then((data) => window.location.href = data.redirect)
+                   .catch(err => console.log(err));
+               })
+            
+               
+           </script>
+</body>
+</html>
