@@ -7,7 +7,7 @@ const Blog = require('./model/blog');
 // express app
 const app = express();
 
-const port =3000
+const port =3001
 // register view engine
 app.set("view engine", "ejs");
 
@@ -71,11 +71,11 @@ const id = req.params.id;
 })
 
 // delet blog by id
-app.delete("/blogs/:id", (req, res) =>{
+app.delete('/blogs/:id', (req, res) =>{
 const id = req.params.id;
   Blog.findByIdAndDelete(id)
   .then((result) => {
-    res.json({redirect: '/blogs'})
+    res.json({redirect:'/blogs'})
   })
      .catch((err) => {console.log(err)});
 })
