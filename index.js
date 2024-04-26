@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require('morgan')
-const mongoose = require('mongoose');  
+const mongoose = require('mongoose'); 
+const bodyParser = require('body-parser');
 // inport the model for blog
 const Blog = require('./model/blog');
 // express app
@@ -22,7 +23,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 //middleware & static files in order to read static file like css images and some javascript
 app.use(morgan('dev'))
 app.use(express.static('public'))
-app.use(express.urlencoded({extended: true})) // this middlware is used to read the body of the request
+app.use(express.urlencoded({extended: true}))// this middlware is used to read the body of the request
+app.use(bodyParser.json())
 
 
 
