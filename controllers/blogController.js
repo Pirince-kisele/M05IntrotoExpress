@@ -1,0 +1,1 @@
+// we gonna create the funstion that will be used in the blogRoutes.js file blog_index, blog_create_post,blog_create_get, blog_details, blog_delete

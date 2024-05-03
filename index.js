@@ -2,9 +2,9 @@ const express = require("express");
 const morgan = require('morgan')
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser');
-// inport the model for blog
-const Blog = require('./model/blog');
-// express app
+// import the router module that we create in the blogRoutes.js file
+const blogRoutes = require('./routes/blogRoutes');
+
 const app = express();
 
 const port =3001
@@ -36,49 +36,9 @@ app.get("/about", (req, res) => {
   //res.send('<h1>Hello World! about page</h1>');
   res.render('about', {title: 'About'});
 });
-//this is the form to create a new blog
-app.get("/blogs/create", (req, res) => {
-  res.render("create", {title: 'Create a blog'});
-})
 
-
-//Blogs Routes
-
-// this is the route to get all the blogs
-app.get("/blogs", (req, res) =>{
-  Blog.find().sort({createdAt: -1})
-  .then((result) => res.render('index', {blogs: result, title: 'All Blogs'}))
-  .catch((err) => console.log(err));
-})
-
-// create new blog in the database and save it in the database
-app.post( "/blogs",(req, res) =>{
-const blog = new Blog(req.body);// this is the object that we are going to save in the database
-  blog.save()
-  .then((result) => {
-    res.redirect('/blogs')
-  })
-  .catch((err) => {console.log(err)});
-  
-})
-// show indivisual blog detailes by fining the id of the blog
-app.get("/blogs/:id", (req, res) =>{
-const id = req.params.id;
-  Blog.findById(id)
-  .then((result) => {
-    res.render('details', {blog: result, title: 'Blog Details'})})
-  .catch((err) => {console.log(err)});
-})
-
-// delet blog by id
-app.delete('/blogs/:id', (req, res) =>{
-const id = req.params.id;
-  Blog.findByIdAndDelete(id)
-  .then((result) => {
-    res.json({redirect:'/blogs'})
-  })
-     .catch((err) => {console.log(err)});
-})
+// blog routes  this gonna take all the routes that we created in the blogRoutes.js file and use it here
+app.use('blogs', blogRoutes);
 
 
 //404 page
