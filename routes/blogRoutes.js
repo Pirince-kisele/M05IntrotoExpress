@@ -7,10 +7,9 @@ const router = express.Router();
 
 // this is the route to get all the blogs
 router.get("/", blogController.blog_index);
-//this is the form to create a new blog
-router.post("/", blogController.blog_create_post);
-
 // create new blog in the database and save it in the database
+router.post("/", blogController.blog_create_post);
+//this is the form to create a new blog
 router.get("/create", blogController.blog_create_get);
 // show indivisual blog detailes by fining the id of the blog
 router.get("/:id", blogController.blog_details);

@@ -10,16 +10,7 @@ const blog_index = (req, res) => {
     )
     .catch((err) => console.log(err));
 };
-const blog_details = (req, res) => {
-  const id = req.params.id;
-  Blog.findById(id)
-    .then((result) => {
-      res.render("blogs/details", { blog: result, title: "Blog Details" });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+
 
 const blog_create_get = (req, res) => {
   res.render("blogs/create", { title: "Create a blog" });
@@ -30,6 +21,16 @@ const blog_create_post = (req, res) => {
     .save()
     .then((result) => {
       res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+const blog_details = (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then((result) => {
+      res.render("blogs/details", { blog: result, title: "Blog Details" });
     })
     .catch((err) => {
       console.log(err);

@@ -43,7 +43,7 @@ app.get("/about", (req, res) => {
 });
 
 // blog routes  this gonna take all the routes that we created in the blogRoutes.js file and use it here
-app.use("blogs", blogRoutes);
+app.use(blogRoutes);
 
 //404 page
 app.use("*", (req, res) => {
